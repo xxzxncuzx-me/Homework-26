@@ -6,6 +6,12 @@ import {
     renderWelcomeMessage
 } from "./elements.js";
 
+if (localStorage.getItem('name')) {
+    renderWelcomeMessage(localStorage.getItem('name'))
+} else {
+    renderInput(elementCreator)
+}
+
 function elementCreator() {
     const input = document.querySelector('input')
     const name = input.value
@@ -17,5 +23,3 @@ function elementCreator() {
         input.style.borderColor = 'red'
     }
 }
-
-renderInput(elementCreator)

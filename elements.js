@@ -1,9 +1,12 @@
 "use strict";
 
+const container = document.createElement('div')
+document.body.prepend(container)
+
 function renderInput(submit) {
-    if (localStorage.getItem('name')) {
-        renderWelcomeMessage(localStorage.getItem('name'))
-    } else {
+    if (container) {
+        container.innerHTML= ""
+    }
         const question = document.createElement('h4')
         question.innerText = 'Hi, what is your name?'
 
@@ -14,30 +17,23 @@ function renderInput(submit) {
         const button = document.createElement('button')
         button.innerText = 'OK'
         button.onclick = submit
-
-        const container = document.createElement('div')
-        document.body.prepend(container)
+        
         container.appendChild(question)
         container.appendChild(input)
         container.appendChild(button)
-    }
-
 }
 
 function renderWelcomeMessage(name) {
-    const div = document.querySelector('div')
-    if (div) {
-        div.remove()
+    if (container) {
+        container.innerHTML= ""
     }
 
-    const greetingDiv = document.createElement('div')
     const greeting = document.createElement('h3')
     
     greeting.textContent = `Hello, ${name}`
     localStorage.setItem('name', name)
 
-    document.body.prepend(greetingDiv)
-    greetingDiv.appendChild(greeting)
+    container.appendChild(greeting)
 }
 
 export {
